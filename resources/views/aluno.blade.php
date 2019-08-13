@@ -150,7 +150,7 @@
                         <th>Opções</th>
                     </tr>
                 
-                    @foreach ($alunos as $a)
+                    @forelse ($alunos as $a)
                         <tr>
                             <td>{{ $a->nome_aluno }}</td>
                             <td>{{ $a->nome_curso }}</td>
@@ -160,7 +160,11 @@
                                 <button class="btn btn-danger btn-xs" data-id="{{ $a->id_encrypt }}" data-toggle="modal" data-target="#modal-delete">Excluir</a>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="4"><p class="text-center text-danger">Nenhum Aluno Cadastrado<p></td>
+                        </tr>
+                    @endforelse
                 
                 </tbody>
 
