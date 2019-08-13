@@ -98,6 +98,13 @@ class ProfessorController extends Controller
         try {
             $id = decrypt($id);
 
+            if(DB::table('curso')
+                ->where('id_professor', $id)
+                ->count() != 0) {
+                
+                return back()->with('alert', 'Ops! Este Professor possui cursos(s) vinculados');
+            }
+
             $professor = Professor::find($id);
 
             $professor->delete();

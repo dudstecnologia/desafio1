@@ -19,7 +19,7 @@ class CursoController extends Controller
             ->join('professor', 'professor.id_professor', '=', 'curso.id_professor')
             ->select('curso.id_curso', 'curso.nome as nome_curso', 'curso.data_criacao', 'professor.nome as nome_professor')
             ->paginate(10);
-
+        
         foreach($cursos as $c) {
             $c->id_encrypt = encrypt($c->id_curso);
             $c->data_criacao    = date('d/m/Y', strtotime($c->data_criacao));
@@ -112,12 +112,19 @@ class CursoController extends Controller
         try {
             $id = decrypt($id);
 
+            if(DB::table('aluno')
+                ->where('id_curso', $id)
+                ->count() != 0) {
+                
+                return back()->with('alert', 'Ops! Este Curso possui aluno(s) vinculados');
+            }
+
             $curso = Curso::find($id);
 
             $curso->delete();
 
             return redirect('curso')->with('success', 'Curso excluído com sucesso');
-
+            
         } catch(\Exception $erro) {
 
             return redirect('curso')->with('error', 'Ops! Ocorreu um erro ao excluir');
