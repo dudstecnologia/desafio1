@@ -1,4 +1,4 @@
-<h2>Projeto CRUD FlexPeak</h2>
+<h2>Projeto CRUD 3 tabelas</h2>
 
 <p>Crie o arquivo .env para armazenar os dados do banco (baseado no arquivo de modelo que já está no repositório), também executar o "composer install" para baixar as dependências e "php artisan key:generate", para gerar a chave de criptografia.</p>
 
